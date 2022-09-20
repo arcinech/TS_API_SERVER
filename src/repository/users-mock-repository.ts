@@ -1,6 +1,7 @@
 import { UsersRepository } from './users-repository.interface';
 import { User } from '../interfaces/user.interface';
 import shortid from 'shortid';
+import { findOrThrow } from '../utils/findOrThrow';
 
 export class UsersMockRepository implements UsersRepository {
   private users: Array<User> = [];
@@ -33,7 +34,7 @@ export class UsersMockRepository implements UsersRepository {
   }
 
   getElementById(id: string): User {
-    return this.users.find(i => i.id === id);
+    return findOrThrow(this.users, i => i.id === id);
   }
 
   getAllItems(): Array<User> {
@@ -41,7 +42,7 @@ export class UsersMockRepository implements UsersRepository {
   }
 
   findUserByFirstName(firstname: string): User {
-    return this.users.find(i => i.firstname === firstname);
+    return findOrThrow(this.users, i => i.firstname === firstname);
   }
 }
 

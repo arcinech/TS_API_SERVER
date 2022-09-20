@@ -1,6 +1,7 @@
 import { ProductsRepository } from './products-repository.interface';
 import { Product } from '../interfaces/product.interface';
 import shortid from 'shortid';
+import { findOrThrow } from '../utils/findOrThrow';
 
 export class ProductsMockRepository implements ProductsRepository {
   private products: Array<Product> = [];
@@ -36,7 +37,7 @@ export class ProductsMockRepository implements ProductsRepository {
   }
 
   getElementById(id: string): Product {
-    return this.products.find(i => i.id === id);
+    return findOrThrow(this.products, i => i.id === id);
   }
 
   getAllItems(): Array<Product> {
@@ -44,6 +45,6 @@ export class ProductsMockRepository implements ProductsRepository {
   }
 
   findProductByName(name: string): Product {
-    return this.products.find(i => i.name === name);
+    return findOrThrow(this.products, i => i.name === name);
   }
 }

@@ -34,3 +34,19 @@ router.get('/find/:name', async (req, res) => {
     res.status(500).json(error);
   }
 });
+
+router.delete('/:id', async (req, res) => {
+  try {
+    return res.json(controller.deleteItem(req.params.id));
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
+
+router.put('/:id', async (req, res) => {
+  try {
+    return res.json(controller.updateItem(req.params.id, req.body));
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
